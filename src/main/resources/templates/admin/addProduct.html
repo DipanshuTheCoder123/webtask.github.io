@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container p-5 mt-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4>Add Product</h4>
+                        <p class="text-success fw-bold" th:if="${successMessage}" th:text="${successMessage}"></p>
+                        <p class="text-danger fw-bold" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/saveProduct" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label>Title</label>
+                                <input type="text" name="title" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Description</label>
+                                <textarea name="description" class="form-control" rows="3" required></textarea>
+                            </div>
+
+                           
+                                <div class="mb-3 col">
+                                    <label>Category</label> <select class="form-control"
+                                    name="category">
+                                    <option>--select--</option>
+                                    <option th:each="c:${value}">[[${c.name}]]</option>
+                                </select>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label>Enter Price</label> <input type="number" name="price" class="form-control">
+                                </div>
+
+                           
+                            <div class="mb-3">
+                                <label>Stock</label>
+                                <input type="number" name="stock" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Status</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="isActive" value="true" id="active" checked>
+                                    <label class="form-check-label" for="active">Active</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="isActive" value="false" id="inactive">
+                                    <label class="form-check-label" for="inactive">Inactive</label>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="mb-3">
+                                <label>Upload Image</label>
+                                <input type="file" name="file" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
